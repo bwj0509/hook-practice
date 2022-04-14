@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('컴포넌트가 화면에 나타남')
+    return () => {
+      console.log('컴포넌트가 화면에 사라짐')
+    }
+  }, [])
+
+  const countUp = () => {
+    setCount(count + 1)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>{count}</div>
+      <button onClick={countUp}>COUNTUP!!</button>
+    </>
   );
 }
 
 export default App;
+
+
+
