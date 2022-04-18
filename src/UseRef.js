@@ -1,9 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function UseRef() {
 
     const [count, setCount] = useState(0);
     const countRef = useRef(0);
+    const inputRef = useRef();
+
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
 
     console.log('랜더링되었네...')
 
@@ -15,6 +20,10 @@ function UseRef() {
         countRef.current += 1
     }
 
+    const login = () => {
+        alert(`환영합니다 ${inputRef.current.value}`)
+        inputRef.current.focus();
+    }
     return (
         <div>
             <h1>useRef</h1>
@@ -22,6 +31,10 @@ function UseRef() {
             <p>Ref : {countRef.current}</p>
             <button onClick={increaseCountState}>State 올려</button>
             <button onClick={increaseCountRef}>Ref 올려</button>
+            <hr />
+            <h1>useRef DOM control</h1>
+            <input type="text" placeholder='username' ref={inputRef} />
+            <button onClick={login}>로그인</button>
         </div>
     );
 }
