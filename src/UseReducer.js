@@ -8,7 +8,11 @@ const initialState = [
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
-            return [...state, action.name]
+            return [...state, [action.id, action.name]]
+        case 'REMOVE':
+            return [...state.filter(user => String(user[0]) !== action.targetId)]
+        default:
+            return state
     }
 }
 
@@ -17,15 +21,18 @@ const reducer = (state, action) => {
 function UseReducer() {
 
     const [name, setName] = useState('')
+    const id = useRef(1)
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const onAdd = () => {
-        dispatch({ type: 'ADD', name })
+        dispatch({ type: 'ADD', name, id: id.current });
+        id.current += 1;
     }
 
     const onRemove = (e) => {
-        console.log(e.target)
+        const targetId = e.target.value
+        dispatch({ type: 'REMOVE', targetId })
     }
 
     return (
@@ -42,10 +49,11 @@ function UseReducer() {
             <div>
                 <ul>
                     {state.map((user, index) => (
-                        <li>{index + 1}{user} <button onClick={onRemove}>삭제</button></li>
+                        <li key={index}>{user[1]} <button value={user[0]} onClick={onRemove}>삭제</button></li>
                     ))}
                 </ul>
             </div>
+            {/* {console.log(state)} */}
         </div>
 
     );
