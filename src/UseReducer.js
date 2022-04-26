@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from 'react';
+import React, { useState, useReducer, useRef, useEffect } from 'react';
 
 
 const initialState = [
@@ -8,9 +8,9 @@ const initialState = [
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD':
-            return [...state, [action.id, action.name]]
+            return [...state, { id: action.id, name: action.name }]
         case 'REMOVE':
-            return [...state.filter(user => String(user[0]) !== action.targetId)]
+            return [...state.filter(user => String(user.id) !== action.targetId)]
         default:
             return state
     }
@@ -28,12 +28,17 @@ function UseReducer() {
     const onAdd = () => {
         dispatch({ type: 'ADD', name, id: id.current });
         id.current += 1;
+        setName('')
     }
 
     const onRemove = (e) => {
         const targetId = e.target.value
         dispatch({ type: 'REMOVE', targetId })
     }
+
+    useEffect(() => {
+        console.log('onAdd실행!')
+    }, [state])
 
     return (
         <div>
@@ -44,16 +49,18 @@ function UseReducer() {
                 placeholder='이름을 입력해주세요'
                 value={name}
                 onChange={(e) => { setName(e.target.value) }}
+                autoFocus
             />
             <button onClick={onAdd} >추가</button>
+            {state.length == 0 ? <div className='popUp'>학생이 아무도 없습니다</div> : null}
             <div>
                 <ul>
                     {state.map((user, index) => (
-                        <li key={index}>{user[1]} <button value={user[0]} onClick={onRemove}>삭제</button></li>
+                        <li key={index}>{user.name} <button value={user.id} onClick={onRemove}>삭제</button></li>
                     ))}
                 </ul>
             </div>
-            {/* {console.log(state)} */}
+            {console.log(state)}
         </div>
 
     );
