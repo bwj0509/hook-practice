@@ -37,7 +37,7 @@ function UseReducer() {
     }
 
     useEffect(() => {
-        console.log('onAdd실행!')
+        console.log('onAdd실행!!!')
     }, [state])
 
     return (
@@ -60,7 +60,6 @@ function UseReducer() {
                     ))}
                 </ul>
             </div>
-            {console.log(state)}
         </div>
 
     );
