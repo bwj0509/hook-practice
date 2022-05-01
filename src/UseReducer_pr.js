@@ -20,7 +20,7 @@ const initialState = [
 function UseReducer_pr() {
 
     const [user, setUser] = useState('')
-    const nextId = useRef(1);
+    const nextId = useRef(1)
 
     const changeUser = (e) => {
         setUser(e.target.value)
