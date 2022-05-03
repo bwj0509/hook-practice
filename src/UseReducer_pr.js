@@ -4,9 +4,11 @@ import React, { useReducer, useRef, useState } from 'react';
 const reducer = (state, action) => {
     switch (action.type) {
         case 'ADDUSER':
-            return [...state, { username: action.user, id: action.id }]
+            return [...state, { username: action.user, id: action.id, active: false }]
         case 'REMOVEUSER':
             return [...state.filter(user => user.id != action.id)]
+        case 'ACTIVE':
+            return [...state.map((user) => user.id == action.id ? { ...user, active: !user.active } : user)]
         default:
             return state
     }
@@ -41,16 +43,26 @@ function UseReducer_pr() {
         })
     }
 
+    const onActive = (e) => {
+        dispatch({
+            type: 'ACTIVE', id: e.target.value
+        })
+    }
     return (
         <div>
             <h1>출석부</h1>
-            <span>총학생수 : {state.length}</span>
+            <span>총학생수 : {state.length}</span><br />
+            <span>활성화된 학생수 : {state.filter((user) => user.active == true).length}</span>
             <div>
                 <input placeholder='이름을 입력하세요' value={user} onChange={changeUser} />
                 <button onClick={addUser}>추가</button>
                 <ul>
                     {state.map((user) => (
-                        <li key={user.id}>{user.username}<button value={user.id} onClick={onRemove}>삭제</button></li>
+                        <li style={{ background: 'green' }} key={user.id}>
+                            {user.active ? <span style={{ color: 'red' }}>{user.username}</span> : <span>{user.username}</span>}
+                            <button value={user.id} onClick={onActive}>활성화</button>
+                            <button value={user.id} onClick={onRemove}>삭제</button>
+                        </li>
                     ))}
                     {console.log(state)}
                 </ul>
