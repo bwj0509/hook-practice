@@ -59,7 +59,7 @@ function UseReducer_pr() {
                 <ul>
                     {state.map((user) => (
                         <li style={{ background: 'green' }} key={user.id}>
-                            {user.active ? <span style={{ color: 'red' }}>{user.username}</span> : <span>{user.username}</span>}
+                            {user.active ? <span style={{ color: 'green' }}>{user.username}</span> : <span>{user.username}</span>}
                             <button value={user.id} onClick={onActive}>활성화</button>
                             <button value={user.id} onClick={onRemove}>삭제</button>
                         </li>
