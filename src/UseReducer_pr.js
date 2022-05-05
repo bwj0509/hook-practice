@@ -52,7 +52,7 @@ function UseReducer_pr() {
         <div>
             <h1>출석부</h1>
             <span>총학생수 : {state.length}</span><br />
-            <span>활성화된 학생수 : {state.filter((user) => user.active == true).length}</span>
+            <span>활성화된 학생수 : {state.filter(user => user.active == true).length}</span>
             <div>
                 <input placeholder='이름을 입력하세요' value={user} onChange={changeUser} />
                 <button onClick={addUser}>추가</button>
