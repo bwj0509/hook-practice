@@ -6,11 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import UseMemo from './UseMemo';
 import UseReducer from './UseReducer';
 import UseReducer_pr from './UseReducer_pr';
+import UseReducer_pr2 from './UseReducer_pr2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UseReducer_pr />
+    <UseReducer_pr2 />
   </React.StrictMode>
 );
 
