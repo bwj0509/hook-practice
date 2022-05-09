@@ -13,7 +13,7 @@ const reducer = (state, action) => {
         case 'ACTIVE':
             return state.map((user) => (user.id == action.id ? { ...user, active: !user.active } : user))
         default:
-            return state
+            return null
     }
 }
 // [...state] === state
@@ -48,8 +48,9 @@ function UseReducer_pr2() {
     }
 
     const onActive = (e) => {
+        console.log('작동합니다')
         dispatch({
-            type: 'ACTIVE', id: e.target.value
+            type: 'ACTIVE', id: e.target.dataset.value
         })
     }
     return (
@@ -60,22 +61,33 @@ function UseReducer_pr2() {
             <hr></hr>
             <span>{`유저 : ${state.length}명`}</span><br></br>
             <span>{`활성화된 유저 : ${state.filter(user => user.active == true).length}명`}</span>
-            {console.log(state)}
-            <ul>
+            <table>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>비고</th>
+                </tr>
                 {state.map((user) => (
-                    <>{user.active
-                        ? <li style={{ color: 'red' }} key={user.id} value={user.id} onClick={onActive}>{user.username}{user.age}
-                            <button value={user.id} onClick={onRemove}>삭제</button>
-                        </li>
-                        : <li key={user.id} value={user.id} onClick={onActive}>{user.username}{user.age}
-                            <button value={user.id} onClick={onRemove}>삭제</button>
-                        </li>
-                    }
+                    <tr>
+                        {user.active
+                            ?
+                            <>
+                                <td key={user.id} data-value={user.id} onClick={onActive}><span style={{ color: 'red' }}>{user.username}</span></td>
+                                <td>{user.age}</td>
+                                <td><button value={user.id} onClick={onRemove}>삭제</button></td>
+                            </>
+                            :
+                            <>
+                                <td key={user.id} data-value={user.id} onClick={onActive}>{user.username}</td>
+                                <td>{user.age}</td>
+                                <td><button value={user.id} onClick={onRemove}>삭제</button></td>
+                            </>
+                        }
 
-                    </>
+                    </tr>
                 ))}
-            </ul>
-
+            </table>
+            {console.log(state)}
         </div>
     );
 }
