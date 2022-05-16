@@ -7,11 +7,12 @@ import UseMemo from './UseMemo';
 import UseReducer from './UseReducer';
 import UseReducer_pr from './UseReducer_pr';
 import UseReducer_pr2 from './UseReducer_pr2';
+import UseReducer_pr3 from './UseReducer_pr3';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UseReducer_pr2 />
+    <UseReducer_pr3 />
   </React.StrictMode>
 );
 
