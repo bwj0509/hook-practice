@@ -86,13 +86,12 @@ function UseReducer_pr3() {
                             <td><button value={user.id} onClick={onRemove}>삭제</button></td>
                         </tr>
                     ))}
-
-
-
-
                 </table>
+
+                <hr />
+                <div>활성화된 유저 리스트</div>
+                {state.filter((user) => (user.active))}
             </div>
-            {console.log(state)}
         </>
 
     );
