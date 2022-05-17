@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useState } from 'react';
+import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 const initialState = [
 
@@ -54,7 +54,10 @@ function UseReducer_pr3() {
         dispatch({
             type: 'ACTIVE', id: e.target.dataset.value
         })
+
     }
+
+
     return (
         <>
             <div>
@@ -90,7 +93,17 @@ function UseReducer_pr3() {
 
                 <hr />
                 <div>활성화된 유저 리스트</div>
-                {state.filter((user) => (user.active))}
+
+                {state.filter(user => user.active == true).length
+                    ? <table>
+                        <tr>
+                            <th>이름</th>
+                        </tr>
+                        {state.filter((user) => (user.active)).map((user) => (<tr><td>{user.name}</td></tr>))}
+                    </table>
+                    : <div className='modal'><h1>활성화된 유저가 없습니다!</h1></div>
+                }
+
             </div>
         </>
 
