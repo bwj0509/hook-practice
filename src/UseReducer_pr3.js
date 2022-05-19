@@ -23,6 +23,7 @@ function UseReducer_pr3() {
 
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
+    const [choicedUser, setChoicedUser] = useState('')
     const id = useRef(1)
 
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -57,10 +58,14 @@ function UseReducer_pr3() {
 
     }
 
+    const onChoice = () => {
+        const random = Math.floor(Math.random() * state.length)
+        setChoicedUser(state[random].name)
+    }
 
     return (
         <>
-            <div>
+            <div className='main'>
                 <input placeholder='이름을 입력하세요' value={name} onChange={onChangeName} />
                 <input placeholder='나이를 입력하세요' value={age} onChange={onChangeAge} />
                 <button onClick={onCreate}>등록</button>
@@ -103,7 +108,9 @@ function UseReducer_pr3() {
                     </table>
                     : <div className='modal'><h1>활성화된 유저가 없습니다!</h1></div>
                 }
-
+                <hr />
+                <div>랜덤으로 유저 한명 뽑기! <button onClick={onChoice}>뽑기</button></div>
+                <div>선택된 유저는 <span style={{ color: 'blue' }}>{choicedUser}</span>입니다</div>
             </div>
         </>
 
