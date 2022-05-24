@@ -104,7 +104,7 @@ function UseReducer_pr3() {
                         <tr>
                             <th>이름</th>
                         </tr>
-                        {state.filter(user => user.active).map((user) => (<tr><td>{user.name}</td></tr>))}
+                        {state.filter(user => user.active).map(user => <tr><td>{user.name}</td></tr>)}
                     </table>
                     : <div className='modal'><h1>활성화된 유저가 없습니다!</h1></div>
                 }
