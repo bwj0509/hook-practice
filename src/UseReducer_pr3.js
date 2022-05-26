@@ -23,7 +23,7 @@ function UseReducer_pr3() {
 
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
-    const [choicedUser, setChoicedUser] = useState('')
+    const [choicedUser, setChoicedUser] = useState('[뽑기 전 상태입니다]')
     const id = useRef(1)
 
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -80,7 +80,6 @@ function UseReducer_pr3() {
                         <td>비고</td>
                     </tr>
                     {state.map((user) => (user.active
-
                         ? <tr key={user.id}>
                             <td>{user.id}</td>
                             <td style={{ color: 'red', cursor: 'pointer' }} data-value={user.id} onClick={onActive}>{user.name}</td>
@@ -97,7 +96,7 @@ function UseReducer_pr3() {
                 </table>
 
                 <hr />
-                <div>활성화된 유저 리스트</div>
+                <div>{`활성화된 유저 리스트 : ${state.filter((user) => (user.active)).length}명`}</div>
 
                 {state.filter(user => user.active == true).length
                     ? <table>
